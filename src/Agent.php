@@ -14,6 +14,21 @@ class Agent extends Mobile_Detect
      * @var array
      */
     protected static $additionalDevices = [
+        'HUAWEI' => 'HUAWEI',
+        'HONOR' => 'HONOR',
+        'vivo' => 'vivo [\w+]',
+        'OPPO' => 'OPPO [\w+]|PADM00',
+        'MI' => '\bMI [\w+]',
+        'Redmi' => 'Redmi [\w+]',
+        'Samsung' => 'SM-?[\w+]',
+        'Letv' => '\bLe(tv)? [\w+]',
+        'GIONEE' => 'GN[\w]+|GIONEE',
+        'meitu' => 'MP[\w]+',
+        'MEIZU' => '\bMX?[\d]+',
+        'Smartisan' => '\bOD[\d]+',
+        'Coolpad' => 'Coolpad [\w]+',
+        'ONEPLUS' => 'ONEPLUS [\w]+',
+
         'Macintosh' => 'Macintosh',
     ];
 
@@ -41,6 +56,11 @@ class Agent extends Mobile_Detect
      * @var array
      */
     protected static $additionalBrowsers = [
+        'MicroMessenger' => 'MicroMessenger',
+        'QQ' => 'QQ/[.0-9]+',
+        'Weibo' => 'Weibo',
+        'Alipay' => 'AliApp\(AP/[.0-9]+\)',
+        'Taobao' => 'AliApp\(TB/[.0-9]+\)',
         'Opera Mini' => 'Opera Mini',
         'Opera' => 'Opera|OPR',
         'Edge' => 'Edge',
@@ -76,6 +96,11 @@ class Agent extends Mobile_Detect
         'IE' => ['IEMobile/[VER];', 'IEMobile [VER]', 'MSIE [VER];', 'rv:[VER]'],
         'Edge' => 'Edge/[VER]',
         'Vivaldi' => 'Vivaldi/[VER]',
+        'MicroMessenger' => 'MicroMessenger/[VER]',
+        'QQ' => 'QQ/[VER]',
+        'Weibo' => 'weibo__[VER]__(iphone|android)__[\w+]',
+        'Alipay' => 'AliApp\(AP/[VER]\)',
+        'Taobao' => 'AliApp\(TB/[VER]\)',
     ];
 
     /**
@@ -170,7 +195,7 @@ class Agent extends Mobile_Detect
      * Match a detection rule and return the matched key.
      *
      * @param  array $rules
-     * @param  null  $userAgent
+     * @param  null $userAgent
      * @return string
      */
     protected function findDetectionRulesAgainstUA(array $rules, $userAgent = null)
@@ -248,8 +273,8 @@ class Agent extends Mobile_Detect
     /**
      * Check if the device is a desktop computer.
      *
-     * @param  string $userAgent   deprecated
-     * @param  array  $httpHeaders deprecated
+     * @param  string $userAgent deprecated
+     * @param  array $httpHeaders deprecated
      * @return bool
      */
     public function isDesktop($userAgent = null, $httpHeaders = null)
@@ -260,8 +285,8 @@ class Agent extends Mobile_Detect
     /**
      * Check if the device is a mobile phone.
      *
-     * @param  string $userAgent   deprecated
-     * @param  array  $httpHeaders deprecated
+     * @param  string $userAgent deprecated
+     * @param  array $httpHeaders deprecated
      * @return bool
      */
     public function isPhone($userAgent = null, $httpHeaders = null)
@@ -331,7 +356,7 @@ class Agent extends Mobile_Detect
                     if (is_array($merged[$key])) {
                         $merged[$key][] = $value;
                     } else {
-                        $merged[$key] .= '|'.$value;
+                        $merged[$key] .= '|' . $value;
                     }
                 }
             }
